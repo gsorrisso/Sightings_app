@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>User Dashboard</title>
+</head>
+<body>  
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: grey; text-decoration: aliceblue;">
+        <div class="container-fluid">
+            <a class="navbar-brand">Welcome {{ user.first_name }}</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active" href="/new_sighting">Add Sighting</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/user/logout">Logout</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <h3>Sasquatch Websightings:</h3>
+    
+    <table class="table table-striped">
+        <tr>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Posted By</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for sighting in sightings %}
+            <tr>
+                <td>{{ sighting.location }}</td>
+                <td>{{ sighting.date }}</td>
+                <td>{{ sighting.current_sasquatch_user.first_name }}</td>
+                <td><a href="/sighting/{{ sighting.id }}">View Sighting </a>||<a href="edit_sighting/{{ sighting.id }}"> Edit</a>||<a href="/delete_sighting/{{ sighting.id }}"> Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
